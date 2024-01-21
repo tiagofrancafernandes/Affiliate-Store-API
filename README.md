@@ -14,6 +14,8 @@ Due to user authorization, after successful authentication, the server response 
 
 #### There are several API URLs you should know about:
 
+> Tip: if use VSCode, try install the REST Client extension `@id:humao.rest-client`
+
 ##### Registration:
 `POST: https://api.tiagofranca.com/api/register`
 
@@ -23,6 +25,20 @@ For user registration, you must use an **unauthorized** POST request with the fo
 - password
 - password_confirmation
 
+```http
+### Register request
+POST http://127.0.0.1:8000/api/register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "name": "Admin",
+    "email": "admin@mail.com",
+    "password": "power@132",
+    "password_confirmation": "power@132"
+}
+```
+
 ##### Login:
 `POST: https://api.tiagofranca.com/api/login`
 
@@ -31,8 +47,29 @@ For user login, you must use an **unauthorized** POST request with the following
 - password
 - remember
 
+```http
+### Login request
+POST http://127.0.0.1:8000/api/login
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@mail.com",
+    "password": "power@132",
+    "remember": true
+}
+```
+
 ##### Sign out:
 `POST: https://api.tiagofranca.com/api/logout`
+
+```http
+### Logout request
+POST http://127.0.0.1:8000/api/logout
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer MyAuthToken
+```
 
 For sign out user, you must use an **authorized** POST request without any parameters.
 
@@ -73,10 +110,15 @@ To reset password you must handle reset password URL from user's email address, 
 
 "token" is an automatically generated string in URL (eg. http://domain.com/reset-password?token=y10$oGbE99vXTLTeTC.k7QVgiOFvtmB1dLY4dXRnteLgTzRKNKYjfLQWS).
 
-##### Get User Data:
+##### Get Auth User Data:
 `GET: https://api.tiagofranca.com/api/user`
 
-To get user's data you must use an **authorized** GET request with Bearer Token generated after successful login request.
+```http
+### User data request
+GET http://127.0.0.1:8000/api/user
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer MyAuthToken
+```
 
-##### Video guide:
-[![Exitus API. Authentication for Web Applications](https://img.youtube.com/vi/A4qdZJFNWu8/0.jpg "Exitus API. Authentication for Web Applications")](https://www.youtube.com/watch?v=A4qdZJFNWu8 "Exitus API. Authentication for Web Applications")
+To get user's data you must use an **authorized** GET request with Bearer Token generated after successful login request.
