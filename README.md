@@ -1,66 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EXITUS API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## What is Exitus API?
+Exitus API provides authentication, authorization for your web apps. Your users can sign in directly with a username and password.
 
-## About Laravel
+There is a user data pull for authorized users. You as a developer can manage the user's data in your web application (use username, email, id, created_at and updated_at for your purposes).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+User authorization through Exitus API based on API authentication using a random token assigned to each user of your application.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Getting started with Exitus API?
+The Exitus API provides endpoint URLs for registration, authorization, email verification, password reset.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Due to user authorization, after successful authentication, the server response contains a token. This token must be saved by your application and used for each future request as the "Bearer Token".
 
-## Learning Laravel
+#### There are several API URLs you should know about:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##### Registration:
+`POST: https://api.tiagofranca.com/api/register`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+For user registration, you must use an **unauthorized** POST request with the following parameters:
+- name
+- email
+- password
+- password_confirmation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##### Login:
+`POST: https://api.tiagofranca.com/api/login`
 
-## Laravel Sponsors
+For user login, you must use an **unauthorized** POST request with the following parameters:
+- email
+- password
+- remember
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+##### Sign out:
+`POST: https://api.tiagofranca.com/api/logout`
 
-### Premium Partners
+For sign out user, you must use an **authorized** POST request without any parameters.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+##### Email Verification (send url):
+`POST: https://api.tiagofranca.com/api/send-email-verification-url`
 
-## Contributing
+To send email verification URL to user's email address, you must use an **authorized** POST request with following:
+- verificationUrl
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+"verificationUrl" is an Base url of a page where user will be redirected from his/her email address (eg. http://domain.com/verify-email-check).
 
-## Code of Conduct
+##### Email Verification (check url):
+`POST: https://api.tiagofranca.com/api/send-email-verification-check`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+To check email verification URL from user's email address, you can use an **unauthorized** or an authorized POST request with following parameters:
+- id
+- hash
 
-## Security Vulnerabilities
+"id" is an id of the current user. "hash" is an automatically generated string from email verification URL (eg. http://domain.com/verify-email-check?id=24&hash=d1D/2aMqY5AVUNjRsaqsK.W56oYS5ltgnJUod3IgJVjKcfxBkJXPu).
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+##### Forgot password:
+`POST: https://api.tiagofranca.com/api/forgot-password`
 
-## License
+To send forgot password URL to user's email address, you must use an **authorized** POST request with following parameters:
+- email
+- resetPasswordUrl
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+"email" is an email of the current user. "resetPasswordUrl" is an Base url of a page where user will be redirected from his/her email address (eg. http://domain.com/reset-password).
+
+##### Reset password:
+`POST: https://api.tiagofranca.com/api/reset-password`
+
+To reset password you must handle reset password URL from user's email address, using an **authorized** POST request with following parameters:
+- email
+- password
+- password_confirmation
+- token
+
+"token" is an automatically generated string in URL (eg. http://domain.com/reset-password?token=y10$oGbE99vXTLTeTC.k7QVgiOFvtmB1dLY4dXRnteLgTzRKNKYjfLQWS).
+
+##### Get User Data:
+`GET: https://api.tiagofranca.com/api/user`
+
+To get user's data you must use an **authorized** GET request with Bearer Token generated after successful login request.
+
+##### Video guide:
+[![Exitus API. Authentication for Web Applications](https://img.youtube.com/vi/A4qdZJFNWu8/0.jpg "Exitus API. Authentication for Web Applications")](https://www.youtube.com/watch?v=A4qdZJFNWu8 "Exitus API. Authentication for Web Applications")
