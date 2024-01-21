@@ -125,3 +125,7 @@ Authorization: Bearer MyAuthToken
 ```
 
 To get user's data you must use an **authorized** GET request with Bearer Token generated after successful login request.
+
+
+##### Links
+- [Maximus-API](https://github.com:Maxim-us/Maximus-API)
