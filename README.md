@@ -128,4 +128,4 @@ To get user's data you must use an **authorized** GET request with Bearer Token 
 
 
 ##### Links
-- [Maximus-API](https://github.com:Maxim-us/Maximus-API)a
+- [Maximus-API](https://github.com:Maxim-us/Maximus-API)
