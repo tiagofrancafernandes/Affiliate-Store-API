@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+  <h1 class="text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Dashboard</h1>
     <TopTabs
         :activeTab="activeTab"
     />

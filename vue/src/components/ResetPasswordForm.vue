@@ -3,12 +3,12 @@
     <div class="w-full max-w-md space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-        <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Reset Password</h2>
-        
+        <h2 class="mt-6 text-center text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Reset Password</h2>
+
       </div>
       <form class="mt-8 space-y-6" @submit.prevent="resetPassword">
         <div class="-space-y-px rounded-md shadow-sm">
-            
+
             <div>
                 <label for="email-address" class="sr-only">Your Email address</label>
                 <input
@@ -18,7 +18,7 @@
                     required="true"
                     class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.email ? 'empty-field' : '']"
-                    placeholder="Email address" 
+                    placeholder="Email address"
                 />
             </div>
             <div>
@@ -26,11 +26,11 @@
                 <input
                     id="password"
                     type="password"
-                    v-model="formData.password"              
+                    v-model="formData.password"
                     required="true"
                     class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.password ? 'empty-field' : '']"
-                    placeholder="Password" 
+                    placeholder="Password"
                 />
             </div>
             <div>
@@ -38,11 +38,11 @@
                 <input
                     id="password_confirmation"
                     type="password"
-                    v-model="formData.password_confirmation"              
+                    v-model="formData.password_confirmation"
                     required="true"
                     class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.password_confirmation ? 'empty-field' : '']"
-                    placeholder="Password confirmation" 
+                    placeholder="Password confirmation"
                 />
             </div>
         </div>
@@ -107,7 +107,7 @@
           type: 'system/SET_ATTEMPT',
           attempt: true
         } )
-        
+
         Auth.forgotPasswordCheck( {
             email: formData.value.email,
             password: formData.value.password,

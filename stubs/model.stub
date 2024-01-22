@@ -1,0 +1,35 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Traits\RecordHelpers;
+
+/**
+ * @property int $id
+ * @property-read string $singleItemCacheKey
+ */
+class {{ class }} extends Model
+{
+    use HasFactory;
+    use SoftDeletes;
+    use RecordHelpers;
+    // use Traits\OnlyTenantScopeTrait; // Only Tenant
+    // use Traits\OnlyGlobalScopeTrait; // Only Global (not tenant)
+
+    // public $table = '';
+
+    protected $fillable = [
+        //
+    ];
+
+    protected $casts = [
+        //
+    ];
+
+    protected $appends = [
+        //
+    ];
+}

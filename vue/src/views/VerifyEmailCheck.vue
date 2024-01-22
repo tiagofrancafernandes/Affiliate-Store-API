@@ -4,8 +4,8 @@
             <div>
 
                 <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-                <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Email verification</h2>
-                
+                <h2 class="mt-6 text-center text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Email verification</h2>
+
                 <p class="mt-2 text-center">
                     Verification ...
                 </p>
@@ -30,10 +30,10 @@
     const route = useRoute()
 
     const userVerified = computed( () => store.getters['user/getEmailVerifiedAt'] )
-    
+
     const verification = () => {
 
-        if( 
+        if(
             typeof route.query.id === 'undefined' ||
             typeof route.query.hash === 'undefined'
         ) {
@@ -44,7 +44,7 @@
             return
 
         }
-        
+
         if( userVerified.value ) {
 
             router.push( { name: 'Dashboard' } )

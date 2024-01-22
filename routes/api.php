@@ -49,3 +49,11 @@ Route::post('/send-email-verification-check', [EmailVerificationController::clas
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // ...
 });
+
+Route::prefix('store')->name('api.store.')->group(function () {
+    require __DIR__ . '/api/store.php';
+});
+
+Route::prefix('admin')->name('api.admin.')->group(function () {
+    require __DIR__ . '/api/admin.php';
+});

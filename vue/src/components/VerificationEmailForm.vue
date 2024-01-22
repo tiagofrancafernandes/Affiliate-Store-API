@@ -4,13 +4,13 @@
         <div>
 
             <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-            <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Email verification</h2>
+            <h2 class="mt-6 text-center text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Email verification</h2>
             <p class="mt-2 text-justify">
                 Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.
             </p>
 
         </div>
-        
+
         <form class="mt-8 space-y-6" @submit.prevent="resendVerificationEmail">
 
             <div>
@@ -61,7 +61,7 @@
 
         if( ! verifTime.value ) return true
 
-        if( ( Date.now() - parseInt( verifTime.value ) ) / 1000 > verifPerion.value ) return true        
+        if( ( Date.now() - parseInt( verifTime.value ) ) / 1000 > verifPerion.value ) return true
 
         return false
 
@@ -73,8 +73,8 @@
 
     }
 
-    const resendVerificationEmail = () => {      
-        
+    const resendVerificationEmail = () => {
+
         if( ! checkVerifTime() ) {
 
             if( messages.value.length===0 ) {
@@ -98,7 +98,7 @@
         } )
 
         Auth.emailVerificationSend()
-        
+
     }
 
     const checkUser = () => {
@@ -111,9 +111,9 @@
 
         }
 
-    }    
+    }
 
-    onMounted( () => {        
+    onMounted( () => {
 
         checkUser()
 

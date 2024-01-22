@@ -1,14 +1,30 @@
 <template>
-
-<Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
+    <!-- https://flowbite.com/docs/components/navbar/#sticky-navbar -->
+<Disclosure
+    as="nav"
+    a-class="bg-white- bg-gray-800 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600"
+    :class="[
+        'bg-white- bg-gray-800 dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600',
+    ]
+    "
+    v-slot="{ open }"
+>
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-16 items-center justify-between">
           <div class="flex items-center">
             <div class="flex-shrink-0">
                 <router-link
-                :to="{name: 'Home'}"
+                    :to="{name: 'Home'}"
+                    class="flex items-center space-x-3 rtl:space-x-reverse no-router-link"
                 >
-                    <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+                    <img
+                        class="h-8 w-8"
+                        :src="SiteSettings.logo"
+                        alt="Logo"
+                    />
+                    <span
+                        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
+                    >{{ SiteSettings.name }}</span>
                 </router-link>
             </div>
             <div class="hidden md:block">
@@ -17,10 +33,14 @@
                   v-for="item in navigation"
                   :key="item.name"
                   :to="{name: item.name}"
-                  class="22 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >{{
-                  item.label
-                }}</router-link>
+                  class="text-gray-300 -hover:bg-gray-700 -hover:text-white px-3 py-2 rounded-md text-sm font-medium focus:outline-none"
+                    :class="[
+                        {
+                            'bg-gray-500 hover:bg-gray-600 text-white text-sm font-semibold rounded-md shadow': isCurrentRouteByName(item.name),
+                            'hover:bg-gray-500/50': !isCurrentRouteByName(item.name)
+                        }
+                    ]"
+                > {{ item.label}}</router-link>
               </div>
             </div>
           </div>
@@ -69,7 +89,6 @@
 
       <DisclosurePanel class="md:hidden">
         <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-
             <router-link
                 v-for="item in navigation"
                 :key="item.name"
@@ -77,9 +96,10 @@
                 class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
             >
                 {{ item.label }}
+                {{ currentRoute.path }}
             </router-link>
-
         </div>
+
         <div class="border-t border-gray-700 pt-4 pb-3">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
@@ -107,7 +127,7 @@
           </div>
         </div>
       </DisclosurePanel>
-    </Disclosure>
+</Disclosure>
 
 </template>
 
@@ -116,8 +136,26 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { computed, ref, onMounted, watch } from 'vue'
 import store from '@/store'
+import { settings } from '@/services/Site'
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
 
 const auth = computed(() => store.getters['user/getUser'])
+const currentRoute = computed(() => router.currentRoute)
+const isCurrentRouteByName = (name) => {
+    return (name == router.currentRoute.value.name);
+}
+
+const SiteSettings = computed(() => {
+    console.log('settings', settings());
+    return {
+        ...settings(),
+    }
+})
+
+const mainColor = computed(() => SiteSettings.value.colors?.main || 'gray') ; //!! WIP
 
 const user = {
     name: 'Tom Cook',
@@ -174,6 +212,10 @@ onMounted(() => {
 watch(auth, () => {
     navPreparation(userNavigation, uN)
     navPreparation(topNavigation, navigation)
+})
+
+watch(router, () => {
+    //
 })
 
 </script>

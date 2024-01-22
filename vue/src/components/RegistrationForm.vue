@@ -3,11 +3,11 @@
     <div class="w-full max-w-md space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-        <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up to your account</h2>
+        <h2 class="mt-6 text-center text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">Sign up to your account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Or
           {{ ' ' }}
-          <router-link 
+          <router-link
             :to="{name:'Login'}"
             class="font-medium text-indigo-600 hover:text-indigo-500"
           >
@@ -26,7 +26,7 @@
                     required="true"
                     class="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.name ? 'empty-field' : '']"
-                    placeholder="John Doe" 
+                    placeholder="John Doe"
                 />
             </div>
             <div>
@@ -38,7 +38,7 @@
                     required="true"
                     class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.email ? 'empty-field' : '']"
-                    placeholder="Email address" 
+                    placeholder="Email address"
                 />
             </div>
             <div>
@@ -46,11 +46,11 @@
                 <input
                     id="password"
                     type="password"
-                    v-model="formData.password"              
+                    v-model="formData.password"
                     required="true"
                     class="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.password ? 'empty-field' : '']"
-                    placeholder="Password" 
+                    placeholder="Password"
                 />
             </div>
             <div>
@@ -58,11 +58,11 @@
                 <input
                     id="password_confirmation"
                     type="password"
-                    v-model="formData.password_confirmation"              
+                    v-model="formData.password_confirmation"
                     required="true"
                     class="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     :class="[errors.length>0 && !formData.password_confirmation ? 'empty-field' : '']"
-                    placeholder="Password confirmation" 
+                    placeholder="Password confirmation"
                 />
             </div>
         </div>
@@ -121,8 +121,8 @@
         if( ! formData.value.email ) errors.value.push( 'Fill in email' )
         if( ! formData.value.password ) errors.value.push( 'Fill in password' )
         if( ! formData.value.password_confirmation ) errors.value.push( 'Confirm your password' )
-        if( 
-            formData.value.password && 
+        if(
+            formData.value.password &&
             formData.value.password_confirmation &&
             formData.value.password !== formData.value.password_confirmation
         ) {
