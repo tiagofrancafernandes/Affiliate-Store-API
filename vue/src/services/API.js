@@ -3,15 +3,13 @@ import store from '@/store'
 import router from '@/router'
 
 const API = axios.create( {
-	baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
   withCredentials: true,
 } )
 
 API.interceptors.request.use( config => {
-
-	config.headers.Authorization = `Bearer ${store.getters['user/getToken']}`
-	return config;
-	
+    config.headers.Authorization = `Bearer ${store.getters['user/getToken']}`
+    return config;
 } )
 
 API.interceptors.response.use(
@@ -24,11 +22,11 @@ API.interceptors.response.use(
       type: 'system/SET_ATTEMPT',
       attempt: false
     } )
-    
+
     if ( error.response ) {
 
       let _errors = typeof error.response.data.error !== 'undefined' ? {"error": [error.response.data.error]} : error.response.data.errors
-      
+
       if( typeof _errors === 'undefined' ) {
 
         if(typeof error.response.data.message !== 'undefined' ) {
@@ -37,10 +35,10 @@ API.interceptors.response.use(
 
         } else {
 
-          _errors = {"error": ['Server error']} 
+          _errors = {"error": ['Server error']}
 
         }
-        
+
       }
 
       store.commit( {
@@ -49,13 +47,13 @@ API.interceptors.response.use(
       } )
 
       if( error.response.status !== 422 ) {
-        
-        // logout 
+
+        // logout
         store.commit( 'user/DESTROY_USER' )
         router.push( {name: 'Login'} )
 
       }
-      
+
     }
     // return Promise.reject(error);
   }

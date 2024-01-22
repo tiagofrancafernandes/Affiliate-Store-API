@@ -39,7 +39,7 @@ const routes = [
   // Email verification
   {
     path: '/verify-email',
-    component: () => import('@/components/DefaultLayout.vue'),    
+    component: () => import('@/components/DefaultLayout.vue'),
     children: [
       {
         path: '/verify-email',
@@ -71,7 +71,7 @@ const routes = [
         name: 'Dashboard',
         component: () =>
           import( '@/views/Dashboard.vue' ),
-      }      
+      }
     ]
   },
 
@@ -84,7 +84,7 @@ const routes = [
     },
     component: () => import( '@/views/Login.vue' ),
   },
-  
+
   // Common pages
   {
     path: '/',
@@ -100,14 +100,14 @@ const routes = [
         name: 'About',
         component: () => import( '@/views/About.vue' ),
       },
-      { 
+      {
         path: '/:pathMatch(.*)*',
         name: 'notFound',
         component: () => import( '@/views/NotFound.vue' ),
-      }    
+      }
     ]
   },
-    
+
 ]
 
 const router = createRouter( {
@@ -129,7 +129,7 @@ router.beforeEach( (to, from, next) => {
 
     _next = { name: 'Login' }
 
-  } else if( token && reqGuest ) {    
+  } else if( token && reqGuest ) {
 
     _next = { name: 'Dashboard' }
 
@@ -146,7 +146,7 @@ router.beforeEach( (to, from, next) => {
 
       await Auth.getUser()
         .then( res => {
-          
+
           // Email verification
           if( ! emailVerification() && reqEmVer ) {
 
